@@ -29,46 +29,60 @@
     function displayAnimalGif(){
         var animal =$(this).attr('data-animal');
         var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + animal + '&api_key=ERdfHjSaiRIAd1Y10eqKvD5P25lEo3Pe&limit=10';
-       // How to get 10 gifs???
+       
         $.ajax({
             url:queryURL,
             method: "GET"
         }).then(function(response){
 
             var results = response.data;
-            for(var i=0; i<results.length; i++){}
+            for(var i=0; i<results.length; i++){
         
             var animalDiv = $("<div class='animal'>");
-            
-            //var rating = response.data.rating;
 
             var p = $("<p>").text("Rating: " + results[i].rating);
             
             animalDiv.append(p);
 
-            //var imgURL =response.data.;
-
             var image = $("<img>").attr("src", results[i].images.fixed_height_still.url);
+
+            $("<img>").attr("data-state","still");
+
+            //results[i].images.fixed_height.url
 
             animalDiv.append(image);
 
             $("#gifs").prepend(animalDiv);
 
-
-    
+            }
         });
     }
 
-    function rederButtons(){
+    function renderButtons(){
         $('#buttons-view').empty();
         for(var i=0; i<animals.length; i++){
             var a = $('<button>');
             a.addClass('animal-btn');
             a.attr('data-name',animals[i]);
-            a.text(movie[i]);
-            $('#buttons-view'.append(a);
+            a.text(animals[i]);
+            $('#buttons-view').append(a);
         }
     }
+
+
+
+    /*$(".gif").on("click",function(){
+       var state = $(this).attr("data-state");
+       if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+      } 
+    });*/
+
+
 
    $('#add-animal').on('click',function(event){
        event.preventDefault();
@@ -77,7 +91,7 @@
        renderButtons();
    });
 
-   $(document).on('click','.movie-btn',displayAnimalGif);
+   $(document).on('click','#animal-btn',displayAnimalGif);
 
    renderButtons();
     </script>
