@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>GifTastic</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="buttons-view">
+
+        </div>
+        <div class="gifs"></div>
+        <div class="addAnimal">
+            <form id="animal-form">
+                <label for="animal-input">Add an animal</label><br>
+                <input type="text" id="animal-input"><br>
+                <input id="add-animal" type="submit" value="Submit">
+            </form>
+
+        </div>
+
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>  
+    <script type="text/javascript">
+        var animals = ['cat','dog','elephant','tiger'];
+    function displayAnimalGif(){
+        var animal =$(this).attr('data-animal');
+        var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + animal + '&api_key=ERdfHjSaiRIAd1Y10eqKvD5P25lEo3Pe&limit=10';
+       // How to get 10 gifs???
+        $.ajax({
+            url:queryURL,
+            method: "GET"
+        }).then(function(response){
+
+            var results = response.data;
+            for(var i=0; i<results.length; i++){}
+        
+            var animalDiv = $("<div class='animal'>");
+            
+            //var rating = response.data.rating;
+
+            var p = $("<p>").text("Rating: " + results[i].rating);
+            
+            animalDiv.append(p);
+
+            //var imgURL =response.data.;
+
+            var image = $("<img>").attr("src", results[i].images.fixed_height_still.url);
+
+            animalDiv.append(image);
+
+            $("#gifs").prepend(animalDiv);
+
+
+    
+        });
+    }
+
+    function rederButtons(){
+        $('#buttons-view').empty();
+        for(var i=0; i<animals.length; i++){
+            var a = $('<button>');
+            a.addClass('animal-btn');
+            a.attr('data-name',animals[i]);
+            a.text(movie[i]);
+            $('#buttons-view'.append(a);
+        }
+    }
+
+   $('#add-animal').on('click',function(event){
+       event.preventDefault();
+       var animal = $('#animal-input').val().trim();
+       animals.push(animal);
+       renderButtons();
+   });
+
+   $(document).on('click','.movie-btn',displayAnimalGif);
+
+   renderButtons();
+    </script>
+
+</body>
+</html>
