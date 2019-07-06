@@ -1,0 +1,43 @@
+.buttons-view{
+    padding:10px;
+    width: 100%;
+    display:block;
+}
+
+html{
+    background-color:silver;
+}
+
+.animal-btn{
+    padding:5px auto;
+    margin:5px;
+    background-color:teal;
+    color:white;
+}
+
+.gifs{
+    float: left;
+    width:70%;
+}
+
+img{
+    display:inherit;
+    clear: both;
+
+}
+
+#addAnimal{
+    
+    float:right;
+    width:30%;
+}
+
+#add-animal{
+    margin: 10px 0;
+    color:white;
+    background-color: teal;
+}
+
+#animal-form{
+    line-height: 24px;
+}
