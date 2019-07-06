@@ -20,8 +20,8 @@ html{
     width:70%;
 }
 
-img{
-    display:inherit;
+#gif{
+    display:inline-block;
     clear: both;
 
 }
